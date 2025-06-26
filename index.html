@@ -6,61 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./assets/style/style.css">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        main {
-            width: 100%;
-            height: 100vh;
-            background-image: url("../../img.jpeg");
-            background-size: 100% 100%;
-            background-position: center center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        #mouse-tracker {
-            width: 30px;
-            height: 30px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            background: #cccccc;
-            border-radius: 50%;
-            mix-blend-mode: difference;
-            z-index: 1000;
-            transition: .2s all linear;
-        }
-    </style>
 </head>
 
 <body>
+    <div id="mouse-tracker"></div>
     <main>
-        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit!</h1>
-        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, et!</h2>
-        <div id="mouse-tracker"></div>
-
+        <div class="mainTextWarper">
+            <h1>Smoothly animated using gsap.to() for a fluid trailing motion.</h1>
+            <h2>Typically animated with a staggered tween: each one follows the mouse with a delay, creating a “snake” or
+                “trail” effect.</h2>
+            <p>GSAP’s stagger feature spaces out the timing of repositioning — older trail elements move slower, producing
+                that fluid wave look.</p>
+        </div>
     </main>
+    <section id="sectionsection2"></section>
+    <section id="sectionsection3">
+        <div class="movingHeading text1">
+            <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+        </div>
+        <div class="movingHeading text2">
+            <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+        </div>
+        <div class="movingHeading text3">
+            <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+        </div>
+        <div class="movingHeading text4">
+            <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+        </div>
+        <div class="movingHeading text5">
+            <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+        </div>
+        <div class="movingHeading text6">
+            <h1>Lorem ipsum dolor sit amet consectetur.</h1>
+        </div>
+    </section>
+    <section id="sectionsection4">
+        <div class="bigTexContainer">
+            <h1 class="bigText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum est dicta optio aliquid
+            architecto inventore.</h1>
+        </div>
+    </section>
+    <section id="sectionsection5">
+        <h1>hello</h1>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
     <script src="./assets/js/script.js"></script>
-    <script>
-        const tracker = document.getElementById("mouse-tracker");
-        document.addEventListener("mousemove", (e) => {
-            tracker.style.left = e.clientX + 'px';
-            tracker.style.top = e.clientY + 'px';
-        });
-
-    </script>
 </body>
 
 </html>
