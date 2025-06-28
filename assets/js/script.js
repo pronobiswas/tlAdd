@@ -49,8 +49,17 @@ let images = [
     "https://picsum.photos/200/300?random=16"
   ];
   // ===positioning====
-  let boxPosition=[{x:-50, y: 40}, {x: 0, y: 20}, {x: 3, y: 30}, {x: 0, y: 40}];
-  let boxSize = [{width: 200, height: 300}, {width: 300, height: 300}, {width: 220, height: 300}, {width: 200, height: 130}];
+  let boxPosition=[{x:-0, y: 40}, {x: 50, y: -100}, {x: 3, y: 30}, {x: 0, y: 40}];
+  let boxPosition1=[{x:-50, y: 40}, {x: 0, y: 15}, {x: 3, y: 30}, {x: 0, y: 40}];
+  let boxPosition2=[{x:-50, y: 40}, {x: 100, y: -100}, {x: 3, y: 30}, {x: 0, y: 40}];
+  let boxPosition3=[{x:-50, y: 40}, {x: 100, y: -100}, {x: 3, y: 30}, {x: 0, y: 40}];
+  let boxPosition4=[{x:50, y: 70}, {x: 10, y: 30}, {x: 0, y: 10}, {x: 0, y: 40}];
+  // boxSize
+  let boxSize = [{width: 200, height: 200}, {width: 300, height: 300}, {width: 220, height: 150}, {width: 200, height: 130}];
+  let boxSize1 = [{width: 100, height: 100}, {width: 220, height: 300}, {width: 220, height: 300}, {width: 200, height: 130}];
+  let boxSize2 = [{width: 200, height: 300}, {width: 300, height: 300}, {width: 220, height: 300}, {width: 200, height: 130}];
+  let boxSize3 = [{width: 200, height: 300}, {width: 200, height: 200}, {width: 220, height: 300}, {width: 200, height: 130}];
+  let boxSize4 = [{width: 170, height: 150}, {width: 230, height: 300}, {width: 320, height: 150}, {width: 200, height: 130}];
   // scroll triger 
 ScrollTrigger.create({
   trigger: "#sectionsection2",
@@ -72,23 +81,32 @@ ScrollTrigger.create({
     } else if (p < 0.20) {
       lineThrough(section2NavItem[0]);
       changeText(text1);
-      chhangeImage(images);
+      chhangeImage(images,boxPosition, boxSize);
+
     } else if (p < 0.4) {
+
       lineThrough(section2NavItem[1]);
       changeText(text2);
-      chhangeImage(images1);
+      chhangeImage(images1,boxPosition1, boxSize1);
+
     } else if (p < 0.6) {
+
       lineThrough(section2NavItem[2]);
       changeText(text3);
-      chhangeImage(images2);
+      chhangeImage(images2,boxPosition2, boxSize2);
+
     } else if (p < 0.8) {
+
       lineThrough(section2NavItem[3]);
       changeText(text4);
-      chhangeImage(images3);
+      chhangeImage(images3,boxPosition3, boxSize3);
+
     } else if (p < 0.9) {
+
       lineThrough(section2NavItem[4]);
       changeText(text1);
-      chhangeImage(images);
+      chhangeImage(images,boxPosition4, boxSize4);
+
     } else {
       section2NavItem.forEach(item => {
         item.style.textDecoration = "none";
@@ -118,8 +136,11 @@ function changeText(text) {
     ease: "none"
   });
 }
- function chhangeImage(images){
+ function chhangeImage(images, boxPosition, boxSize) {
   let floatingimageBox = document.querySelectorAll(".floatingimageBox");
+  console.log("images", images);
+  console.log("boxPosition", boxPosition);
+  console.log("boxSize", boxSize);
   floatingimageBox.forEach((elm,idx) => {
      gsap.fromTo(elm, 
       { x: 0, 
@@ -150,7 +171,7 @@ function changeText(text) {
       trigger: "#sectionsection3",
       start: "top top",
       end: "+=1000",
-      pin: true,
+      pin: false,
       scrub: true
     }
   });
@@ -159,7 +180,7 @@ function changeText(text) {
     x: 300, 
     scrollTrigger: {
       trigger: "#sectionsection3",
-      start: "top top",
+      start: "top 70%",
       end: "+=1000",
       scrub: true
     }
@@ -168,7 +189,7 @@ function changeText(text) {
     x: -230,
     scrollTrigger: {
       trigger: "#sectionsection3",
-      start: "top top",
+      start: "top 70%",
       end: "+=1000",
       scrub: true
     }
@@ -177,7 +198,7 @@ function changeText(text) {
     x: 350, 
     scrollTrigger: {
       trigger: "#sectionsection3",
-      start: "top top",
+      start: "top 65%",
       end: "+=1000",
       scrub: true
     }
@@ -186,7 +207,7 @@ function changeText(text) {
     x: -400,
     scrollTrigger: {
       trigger: "#sectionsection3",
-      start: "top top",
+      start: "top 60%",
       end: "+=1000",
       scrub: true
     }
@@ -195,7 +216,7 @@ function changeText(text) {
     x: 200,
     scrollTrigger: {
       trigger: "#sectionsection3",
-      start: "top top",
+      start: "top 50%",
       end: "+=1000",
       scrub: true
     }
@@ -204,7 +225,7 @@ function changeText(text) {
     x: -150, 
     scrollTrigger: {
       trigger: "#sectionsection3",
-      start: "top top",
+      start: "top 50%",
       end: "+=1000",
       scrub: true
     }
