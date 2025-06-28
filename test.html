@@ -2,140 +2,71 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
-    <title>Document</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+  <title>Document</title>
 
-        main {
-            width: 100%;
-            height: 100vh;
-            background-image: url("../../img.jpeg");
-            background-size: 100% 100%;
-            background-position: center center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-
-        #mouse-tracker {
-            width: 30px;
-            height: 30px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            background: #cccccc;
-            border-radius: 50%;
-            mix-blend-mode: difference;
-            z-index: 1000;
-            transition: 0.2s all linear;
-        }
-
-        .ripple {
-            width: 80px;
-            height: 80px;
-            background-color: rgba(138, 4, 4, 0.267);
-            border: 1px solid rgba(255, 255, 255, 0.932);
-            border-radius: 50%;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 999;
-            mix-blend-mode: difference;
-        }
-        .trail-dot {
-            position: fixed;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(6px);
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
-  }
-    </style>
+  <style>
+    #glitchText {
+      font-size: 3rem;
+      color: lime;
+      font-family: monospace;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+  </style>
 </head>
 
 <body>
-    <div id="mouse-tracker"></div>
-    <main>
-        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit!</h1>
-        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, et!</h2>
+  <div id="mouse-tracker"></div>
 
+  <main>
+    <h1 id="glitchText">GLITCH EFFECT</h1>
+  </main>
 
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-    <script>
-        const tracker = document.getElementById("mouse-tracker");
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 
+  <script>
+    const chars = "!<>-_\\/[]{}—=+*^?#________";
+    const target = document.getElementById("glitchText");
+    const finalText = target.textContent;
+    let frame = 0;
 
-        for (let i = 0; i < 10; i++) {
-            let ripple = document.createElement("div");
-            ripple.className = "ripple";
-            document.body.appendChild(ripple); // Not inside tracker
+    function randomChar() {
+      return chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    function glitchText(text, duration = 1.5, fps = 60) {
+      const totalFrames = duration * fps;
+      const letters = text.split("");
+      let output = [...letters];
+
+      const interval = setInterval(() => {
+        for (let i = 0; i < letters.length; i++) {
+          if (i < frame / (totalFrames / letters.length)) {
+            output[i] = letters[i]; // lock correct char
+          } else {
+            output[i] = randomChar();
+          }
         }
 
-        // Update tracker and ripples on mousemove
-        document.addEventListener("mousemove", (e) => {
-            tracker.style.left = e.clientX + "px";
-            tracker.style.top = e.clientY + "px";
+        target.textContent = output.join("");
+        frame++;
 
-            gsap.to(".ripple", {
-                x: e.clientX,
-                y: e.clientY,
-                duration: 0.4,
-                ease: "power2.out",
-                stagger: {
-                    each: 0.05,
-                    from: "start",
-                }
-            });
-        });
+        if (frame >= totalFrames) {
+          clearInterval(interval);
+          target.textContent = text; // final correction
+        }
+      }, 1000 / fps);
+    }
 
-         const trailLength = 20;
-  const trailDots = [];
-
-  // Create trail elements
-  for (let i = 0; i < trailLength; i++) {
-    const dot = document.createElement('div');
-    dot.classList.add('trail-dot');
-    document.body.appendChild(dot);
-    trailDots.push(dot);
-  }
-
-  // Track mouse position
-  let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-
-  window.addEventListener('mousemove', (e) => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-
-    gsap.to(trailDots, {
-      x: mouse.x,
-      y: mouse.y,
-      ease: 'power3.out',
-      duration: 0.6,
-      stagger: {
-        each: 0.03,
-        from: 'start',
-      }
+    // Trigger on load (or however you want)
+    document.addEventListener("DOMContentLoaded", () => {
+      glitchText(finalText, 2); // 2 seconds duration
     });
-  });
+  </script>
 
-    </script>
 </body>
 
 </html>
