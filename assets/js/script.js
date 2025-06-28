@@ -25,28 +25,28 @@ let text3= "Maecenas aliquam mi sed augue maximus, eget tempus urna suscipit. Pr
 let text4= "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, deserunt!";
 // ===images===
 let images = [
-    "https://picsum.photos/200/300?random=1",
-    "https://picsum.photos/200/300?random=2",
-    "https://picsum.photos/200/300?random=3",
-    "https://picsum.photos/200/300?random=4"
+    "/assets/media/image/image1.png",
+    "/assets/media/image/image2.png",
+    "/assets/media/image/image3.png",
+    "/assets/media/image/image4.png"
   ];
   let images1 = [
-    "https://picsum.photos/200/300?random=5",
-    "https://picsum.photos/200/300?random=6",
-    "https://picsum.photos/200/300?random=7",
-    "https://picsum.photos/200/300?random=8"
+    "/assets/media/image/image5.png",
+    "/assets/media/image/image6.png",
+    "/assets/media/image/image7.png",
+    "/assets/media/image/image8.png"
   ];
   let images2 = [
-    "https://picsum.photos/200/300?random=9",
-    "https://picsum.photos/200/300?random=10",
-    "https://picsum.photos/200/300?random=11",
-    "https://picsum.photos/200/300?random=12"
+    "/assets/media/image/image9.png",
+    "/assets/media/image/image10.png",
+    "/assets/media/image/image11.png",
+    "/assets/media/image/image12.png"
   ];
   let images3 = [
-    "https://picsum.photos/200/300?random=13",
-    "https://picsum.photos/200/300?random=14",
-    "https://picsum.photos/200/300?random=15",
-    "https://picsum.photos/200/300?random=16"
+    "/assets/media/image/image13.png",
+    "/assets/media/image/image14.png",
+    "/assets/media/image/image15.png",
+    "/assets/media/image/image16.png"
   ];
   // ===positioning====
   let boxPosition=[{x:-0, y: 40}, {x: 50, y: -100}, {x: 3, y: 30}, {x: 0, y: 40}];
@@ -180,7 +180,7 @@ function changeText(text) {
     x: 300, 
     scrollTrigger: {
       trigger: "#sectionsection3",
-      start: "top 70%",
+      start: "top 80%",
       end: "+=1000",
       scrub: true
     }
@@ -189,7 +189,7 @@ function changeText(text) {
     x: -230,
     scrollTrigger: {
       trigger: "#sectionsection3",
-      start: "top 70%",
+      start: "top 75%",
       end: "+=1000",
       scrub: true
     }
@@ -198,7 +198,7 @@ function changeText(text) {
     x: 350, 
     scrollTrigger: {
       trigger: "#sectionsection3",
-      start: "top 65%",
+      start: "top 60%",
       end: "+=1000",
       scrub: true
     }
@@ -207,7 +207,7 @@ function changeText(text) {
     x: -400,
     scrollTrigger: {
       trigger: "#sectionsection3",
-      start: "top 60%",
+      start: "top 50%",
       end: "+=1000",
       scrub: true
     }
@@ -216,7 +216,7 @@ function changeText(text) {
     x: 200,
     scrollTrigger: {
       trigger: "#sectionsection3",
-      start: "top 50%",
+      start: "top 40%",
       end: "+=1000",
       scrub: true
     }
@@ -225,7 +225,7 @@ function changeText(text) {
     x: -150, 
     scrollTrigger: {
       trigger: "#sectionsection3",
-      start: "top 50%",
+      start: "top 35%",
       end: "+=1000",
       scrub: true
     }
@@ -236,7 +236,7 @@ function changeText(text) {
       opacity: 1,
       scrollTrigger: {
         trigger: ".bigTexContainer",
-        start: "top 70%", 
+        start: "top 80%", 
         end: "+=1000",
         scrub: true,
       }
