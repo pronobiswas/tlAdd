@@ -48,6 +48,9 @@ let images = [
     "https://picsum.photos/200/300?random=15",
     "https://picsum.photos/200/300?random=16"
   ];
+  // ===positioning====
+  let boxPosition=[{x:-50, y: 40}, {x: 0, y: 20}, {x: 3, y: 30}, {x: 0, y: 40}];
+  let boxSize = [{width: 200, height: 300}, {width: 300, height: 300}, {width: 220, height: 300}, {width: 200, height: 130}];
   // scroll triger 
 ScrollTrigger.create({
   trigger: "#sectionsection2",
@@ -124,8 +127,11 @@ function changeText(text) {
         opacity:0,
         backgroundImage: `url(${images[idx]})` 
       },
-      { x: 0, 
-        y: 40, 
+      { x: boxPosition[idx].x, 
+        y:  boxPosition[idx].y,
+        width: boxSize[idx].width,
+        height: boxSize[idx].height,
+        ease: "power2.out", 
         duration: 0.5,
         opacity:1, 
         backgroundImage: `url(${images[idx]})` 
