@@ -100,9 +100,6 @@ ScrollTrigger.create({
   // markers: true,
   onUpdate: (self) => {
     const p = self.progress;
-    console.log(p);
-    
-
     if (p < 0.1) {
       section2NavItem.forEach(item => {
         item.style.textDecoration = "none";
@@ -177,9 +174,6 @@ function changeText(text) {
 // }
  function chhangeImage(images, boxPosition, boxSize) {
   let floatingimageBox = document.querySelectorAll(".floatingimageBox");
-  console.log("images", images);
-  console.log("boxPosition", boxPosition);
-  console.log("boxSize", boxSize);
   floatingimageBox.forEach((elm,idx) => {
      gsap.fromTo(elm, 
       { x: 0, 
@@ -380,10 +374,12 @@ if (section5) {
     });
   });
   section5.addEventListener("click", () => {
-    let location = window.location.href;
-    let location2 = window.getSelection().toString();
-    console.log("Location:", location);
-    console.log("Selected Text:", location2);
+    let section5Wrapoper = document.querySelector("#section5Wrapoper");
+    section5Wrapoper.style.position = "fixed";
+    section5Wrapoper.style.top = "0";
+    section5Wrapoper.style.left = "0";
+    section5Wrapoper.style.zIndex = "9999";
+
 
     if (hasScrollTriggered) return;
     hasScrollTriggered = true;
@@ -403,6 +399,43 @@ if (section5) {
       ease: "none",
       scrollTrigger: {
         trigger: "#sectionsection5",
+        start: "top top",
+        end: () => `+=${scrollAmount}`,
+        scrub: true,
+        pin: true,
+        anticipatePin: 1,
+      },
+    });
+
+  });
+}
+
+let section6 = document.getElementById("section6");
+let section6Wrapoper = document.querySelector("#section6Wrapoper");
+let scrollContainer = document.querySelector(".scrollContainer");
+if (section6) {
+  section6.addEventListener("click", () => { 
+    scrollContainer.style.position = "fixed";
+    scrollContainer.style.top = "0";
+    scrollContainer.style.left = "0";
+    scrollContainer.style.width = "100vw";
+    scrollContainer.style.height = "100vh";
+    scrollContainer.style.backgroundColor = "rgb(0, 38, 255)";
+    scrollContainer.style.zIndex = "9999";
+  });
+  scrollContainer.addEventListener('scroll',(e)=>{
+    console.log("scrolling 66", e);
+    
+    const totalScrollWidth = scrollContainer.scrollWidth;
+    const viewportWidth = window.innerWidth;
+    const scrollAmount = totalScrollWidth - viewportWidth;
+
+    gsap.to(scrollContainer, {
+      x: () => -scrollAmount,
+      zIndex: 99,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#section6",
         start: "top top",
         end: () => `+=${scrollAmount}`,
         scrub: true,
