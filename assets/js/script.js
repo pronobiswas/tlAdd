@@ -284,29 +284,131 @@ function changeText(text) {
   );
 });
 
+// let section5 = document.getElementById("sectionsection5");
+// let horizontalScrollWrapper = document.querySelector(".horizontalScrollWrapper");
+// console.log(section5);
+// console.log(horizontalScrollWrapper.offsetWidth);
+
+// let isScroll = "false";
+// if (section5) {
+//   let tracker = document.getElementById("mouse-tracker");
+//   let ripple = document.querySelectorAll(".ripple");
+//   section5.addEventListener('mouseenter', () => {
+//     tracker.innerHTML="view more" ;
+//     gsap.to(tracker, {
+//       width:100,
+//       height: 100,
+//       duration: 0.5,
+//       ease: "power2.out"
+//     });
+//   });
+//   section5.addEventListener('mouseleave', () => {
+
+//     tracker.innerHTML="" ;
+//     gsap.to(tracker, {
+//       width:30,
+//       height: 30,
+//       duration: 0.5,
+//       ease: "power2.out"
+//     });
+//   });
+// }
+// section5.addEventListener('click',()=>{
+// gsap.to(horizontalScrollWrapper, { 
+//   opacity: 1,
+//   duration: 0.5,
+//  })
+//  isScroll= "true";
+
+//  if (isScroll === "true") {
+//    gsap.to(horizontalScrollWrapper, {
+//      x: 0,
+//      scrollTrigger: {
+//        trigger: "#sectionsection5",
+//        start: "top top",
+//        end: "+=1000",
+//        pin: true,
+//        scrub: true
+//      }
+//    });
+  
+
+//   const totalScrollWidth = horizontalScrollWrapper.scrollWidth;
+//   const viewportWidth = window.innerWidth;
+//   const scrollAmount = totalScrollWidth - viewportWidth;
+
+//   gsap.to(horizontalScrollWrapper, {
+//     x: () => -scrollAmount,
+//     ease: "none",
+//     scrollTrigger: {
+//       trigger: ".horizontal-wrapper",
+//       start: "top top",
+//       end: () => `+=${scrollAmount}`,
+//       scrub: true,
+//       pin: true,
+//       anticipatePin: 1,
+//     }
+//   });
+// }
+// })
+
 let section5 = document.getElementById("sectionsection5");
+let horizontalScrollWrapper = document.querySelector(".horizontalScrollWrapper");
+let tracker = document.getElementById("mouse-tracker");
+let ripple = document.querySelectorAll(".ripple");
+let hasScrollTriggered = false;
+
 if (section5) {
-  let tracker = document.getElementById("mouse-tracker");
-  let ripple = document.querySelectorAll(".ripple");
-  section5.addEventListener('mouseenter', () => {
-    tracker.innerHTML="view more" ;
+  // Mouse enter/leave hover effects
+  section5.addEventListener("mouseenter", () => {
+    tracker.innerHTML = "view more";
     gsap.to(tracker, {
-      width:100,
+      width: 100,
       height: 100,
       duration: 0.5,
-      ease: "power2.out"
+      ease: "power2.out",
     });
   });
-  section5.addEventListener('mouseleave', () => {
 
-    tracker.innerHTML="" ;
+  section5.addEventListener("mouseleave", () => {
+    tracker.innerHTML = "";
     gsap.to(tracker, {
-      width:30,
+      width: 30,
       height: 30,
       duration: 0.5,
-      ease: "power2.out"
+      ease: "power2.out",
+    });
+  });
+  section5.addEventListener("click", () => {
+    let location = window.location.href;
+    let location2 = window.getSelection().toString();
+    console.log("Location:", location);
+    console.log("Selected Text:", location2);
+
+    if (hasScrollTriggered) return;
+    hasScrollTriggered = true;
+
+    gsap.to(horizontalScrollWrapper, {
+      opacity: 1,
+      duration: 0.5,
+    });
+
+    const totalScrollWidth = horizontalScrollWrapper.scrollWidth;
+    const viewportWidth = window.innerWidth;
+    const scrollAmount = totalScrollWidth - viewportWidth;
+
+    gsap.to(horizontalScrollWrapper, {
+      x: () => -scrollAmount,
+      zIndex: 99,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#sectionsection5",
+        start: "top top",
+        end: () => `+=${scrollAmount}`,
+        scrub: true,
+        pin: true,
+        anticipatePin: 1,
+      },
     });
   });
 }
-
-
