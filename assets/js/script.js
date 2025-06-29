@@ -16,6 +16,35 @@ document.addEventListener("DOMContentLoaded", () => {
       
     });
   });
+  const toTop = document.querySelector(".toTop");
+ 
+toTop.addEventListener("mousemove", (e) => {
+  const bounds = toTop.getBoundingClientRect();
+  const relX = e.clientX - bounds.left;
+  const relY = e.clientY - bounds.top;
+
+  const centerX = bounds.width / 2;
+  const centerY = bounds.height / 2;
+
+  const moveX = (relX - centerX) / 6;
+  const moveY = (relY - centerY) / 6;
+
+  gsap.to(toTop, {
+    x: moveX,
+    y: moveY,
+    duration: 0.3,
+    ease: "power2.out"
+  });
+});
+
+toTop.addEventListener("mouseleave", () => {
+  gsap.to(toTop, {
+    x: 0,
+    y: 0,
+    duration: 0.4,
+    ease: "power2.out"
+  });
+});
 // work with section2
 let section2NavItem = document.querySelectorAll(".section2NavItem h3");
 // ===text content===
@@ -49,13 +78,13 @@ let images = [
     "/assets/media/image/image16.png"
   ];
   // ===positioning====
-  let boxPosition=[{x:-0, y: 40}, {x: 50, y: -100}, {x: 3, y: 30}, {x: 0, y: 40}];
+  let boxPosition=[{x:0, y: 20}, {x: 50, y: 100}, {x: 30, y: -30}, {x: 0, y: 40}];
   let boxPosition1=[{x:-50, y: 40}, {x: 0, y: 15}, {x: 3, y: 30}, {x: 0, y: 40}];
   let boxPosition2=[{x:-50, y: 40}, {x: 100, y: -100}, {x: 3, y: 30}, {x: 0, y: 40}];
   let boxPosition3=[{x:-50, y: 40}, {x: 100, y: -100}, {x: 3, y: 30}, {x: 0, y: 40}];
   let boxPosition4=[{x:50, y: 70}, {x: 10, y: 30}, {x: 0, y: 10}, {x: 0, y: 40}];
   // boxSize
-  let boxSize = [{width: 200, height: 200}, {width: 300, height: 300}, {width: 220, height: 150}, {width: 200, height: 130}];
+  let boxSize = [{width: 200, height: 250}, {width: 220, height: 300}, {width: 220, height: 250}, {width: 300, height: 230}];
   let boxSize1 = [{width: 100, height: 100}, {width: 220, height: 300}, {width: 220, height: 300}, {width: 200, height: 130}];
   let boxSize2 = [{width: 200, height: 300}, {width: 300, height: 300}, {width: 220, height: 300}, {width: 200, height: 130}];
   let boxSize3 = [{width: 200, height: 300}, {width: 200, height: 200}, {width: 220, height: 300}, {width: 200, height: 130}];
@@ -121,21 +150,31 @@ function lineThrough(elm){
   elm.style.textDecorationColor = "red";
 };
 
-// function changeText(text) {
-//   const textElement = document.querySelector(".section2TextContent h1");
-//   textElement.textContent = text;
-// }
-
 function changeText(text) {
   const textElement = document.querySelector(".section2TextContent h1");
-  gsap.registerPlugin(TextPlugin); // make sure this runs once in your script
-
   gsap.to(textElement, {
-    duration: 0.5,
-    text: text,
-    ease: "none"
+    duration: 0.2,
+    ease: "none",
+    onComplete: () => {
+      textElement.textContent = text;
+      gsap.fromTo(textElement,
+        { opacity: 0 , y: -20 },
+        { opacity: 1, duration: 0.5, y: 0 }
+      );
+    }
   });
 }
+
+// function changeText(text) {
+//   const textElement = document.querySelector(".section2TextContent h1");
+//   gsap.registerPlugin(TextPlugin);
+
+//   gsap.to(textElement, {
+//     duration: 0.5,
+//     text: text,
+//     ease: "none"
+//   });
+// }
  function chhangeImage(images, boxPosition, boxSize) {
   let floatingimageBox = document.querySelectorAll(".floatingimageBox");
   console.log("images", images);
@@ -230,6 +269,7 @@ function changeText(text) {
       scrub: true
     }
   });
+  // ==section4 big text==
   gsap.to(
     ".bigText",
     {
