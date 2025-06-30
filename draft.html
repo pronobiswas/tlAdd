@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GSAP Horizontal Scroll in Fixed Section</title>
+        <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    #section1, #section3 {
+      height: 500px;
+      background-color: #111;
+    }
+
+    #sectionsection5 {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      background: black;
+      display: none;
+    }
+
+    .closebtn {
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: red;
+      color: white;
+      font-size: 20px;
+      z-index: 1000;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .closebtn:hover {
+      background-color: yellow;
+      color: black;
+    }
+
+    #section5Wrapoper {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden; /* prevent native scrollbars */
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .horizontalScrollItem {
+      display: inline-block;
+      width: 70vw;
+      height: 100%;
+      background-color: #333;
+      margin-right: 20px;
+      vertical-align: top;
+    }
+
+    .horizontalScrollItem h2 {
+      font-size: 50px;
+      color: #fc11c1;
+      text-align: center;
+      margin-top: 40px;
+      font-family: sans-serif;
+    }
+
+    .reset-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 2000;
+      padding: 10px 20px;
+      background-color: #444;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+<body>
+
+  <section id="section">
+    <button style="margin: 20px; padding: 10px 20px;" onclick="activateSection5()">Enter Horizontal Scroll</button>
+  </section>
+
+  <section id="sectionsection5">
+    <div class="closebtn">X</div>
+    <div id="section5Wrapoper" class="horizontalScrollWrapper">
+      <div class="horizontalScrollItem"><h2>Item 1</h2></div>
+      <div class="horizontalScrollItem"><h2>Item 2</h2></div>
+      <div class="horizontalScrollItem"><h2>Item 3</h2></div>
+      <div class="horizontalScrollItem"><h2>Item 4</h2></div>
+      <div class="horizontalScrollItem"><h2>Item 5</h2></div>
+    </div>
+  </section>
+
+  <section id="section"></section>
+
+  <button class="reset-btn" onclick="localStorage.removeItem('fixedMode'); window.location.reload();">
+    Reload & Reset
+  </button>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollToPlugin);
+
+    const section5 = document.getElementById("sectionsection5");
+    const closebtn = document.querySelector(".closebtn");
+    const wrapper = document.getElementById("section5Wrapoper");
+
+    function activateSection5() {
+      section5.style.position = "fixed";
+      section5.style.top = "0";
+      section5.style.left = "0";
+      section5.style.zIndex = "9999";
+      section5.style.width = "100vw";
+      section5.style.height = "100vh";
+      section5.style.display = "block";
+      document.body.style.overflow = "hidden";
+      localStorage.setItem("fixedMode", "true");
+
+      // Optional: animate entry of items
+      gsap.from(".horizontalScrollItem", {
+        opacity: 0,
+        y: 100,
+        stagger: 0.2,
+        duration: 0.6,
+        ease: "power2.out"
+      });
+    }
+
+    closebtn.addEventListener("click", () => {
+      section5.style.display = "none";
+      section5.removeAttribute("style");
+      document.body.style.overflow = "auto";
+      localStorage.removeItem("fixedMode");
+    });
+
+    // Auto-enable on reload
+    if (localStorage.getItem("fixedMode") === "true") {
+      activateSection5();
+    }
+
+    // Smooth horizontal scroll with GSAP on mouse wheel
+    let scrollPos = 0;
+    wrapper.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      const scrollSpeed = 100;
+      scrollPos += e.deltaY > 0 ? scrollSpeed : -scrollSpeed;
+      const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+
+      // Clamp between 0 and maxScroll
+      scrollPos = Math.max(0, Math.min(scrollPos, maxScroll));
+
+      gsap.to(wrapper, {
+        scrollTo: { x: scrollPos },
+        duration: 0.5,
+        ease: "power2.out"
+      });
+    }, { passive: false });
+  </script>
+
+</body>
+</html>

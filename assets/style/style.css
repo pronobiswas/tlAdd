@@ -233,99 +233,100 @@ main .mainTextWarper {
   color: #fff;
 }
 
-#sectionsection5 {
-  width: 100vw;
-  height: 100vh;
-  position: relative;
-}
-#sectionsection5 .closebtn {
-  width: 100px;
-  height: 100px;
+.closebtn {
+  width: 60px;
+  height: 60px;
   position: absolute;
   top: 20px;
   right: 20px;
   background-color: red;
+  color: white;
+  font-size: 20px;
   z-index: 1000;
-}
-#sectionsection5 #section5Wrapoper {
-  width: 100%;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  min-height: 100vh;
-  background-color: #000000;
 }
-#sectionsection5 #section5Wrapoper h1 {
-  font-size: 100px;
-  color: #ff0000;
-  text-transform: uppercase;
-  text-align: center;
-  font-family: "Bebas Neue", sans-serif;
+
+#sectionsection5 {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: black;
+  display: none;
 }
-#sectionsection5 #section5Wrapoper .horizontalScrollWrapper {
+#sectionsection5 #section5Wrapoper {
   width: 100%;
   height: 100%;
-  padding: 20px;
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: start;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
+  overflow-x: hidden;
+  white-space: nowrap;
+  position: relative;
 }
-#sectionsection5 #section5Wrapoper .horizontalScrollWrapper .horizontalScrollItem {
-  background-color: transparent;
-  width: 100%;
-  min-width: 70%;
+#sectionsection5 #section5Wrapoper .horizontalScrollItem {
+  display: inline-block;
+  width: 70vw;
   height: 100%;
+  background-color: #333;
+  margin-right: 20px;
+  vertical-align: top;
 }
-#sectionsection5 #section5Wrapoper .horizontalScrollWrapper .horizontalScrollItem h2 {
+#sectionsection5 #section5Wrapoper .horizontalScrollItem h2 {
   font-size: 50px;
   color: #fc11c1;
-  text-transform: uppercase;
   text-align: center;
-  font-family: "Bebas Neue", sans-serif;
-}
-#sectionsection5 #section5Wrapoper .horizontalScrollWrapper .horizontalScrollItem:nth-child(1) {
-  background-color: #ff0000;
-}
-#sectionsection5 #section5Wrapoper .horizontalScrollWrapper .horizontalScrollItem:nth-child(2) {
-  background-color: #00ff00;
-}
-#sectionsection5 #section5Wrapoper .horizontalScrollWrapper .horizontalScrollItem:nth-child(3) {
-  background-color: #00ffff;
-}
-#sectionsection5 #section5Wrapoper .horizontalScrollWrapper .horizontalScrollItem:nth-child(4) {
-  background-color: #ff0000;
-}
-#sectionsection5 #section5Wrapoper .horizontalScrollWrapper .horizontalScrollItem:nth-child(5) {
-  background-color: #00ffff;
-}
-#sectionsection5 #section5Wrapoper .horizontalScrollWrapper .horizontalScrollItem:nth-child(6) {
-  background-color: #00ffff;
+  margin-top: 40px;
+  font-family: sans-serif;
 }
 
 #section6 {
   width: 100%;
   height: 100vh;
-  background-color: rgba(255, 0, 255, 0.6705882353);
-  padding: 20px;
+  background-color: rgba(31, 0, 31, 0.7058823529);
 }
-#section6 #section6Wrapper .scrollContainer {
+#section6 #section6Wrapper {
   width: 100%;
+  height: 100%;
+  position: relative;
+}
+#section6 #section6Wrapper .closeButton6 {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  z-index: 9999;
+}
+#section6 #section6Wrapper .mainContent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+#section6 #section6Wrapper .mainContent .proRow {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 20px;
+  color: #fff;
+}
+#section6 #section6Wrapper .csrollContainer {
+  width: -moz-max-content;
+  width: max-content;
+  height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-wrap: nowrap;
+  gap: 10px;
+  position: absolute;
+  top: 0;
+  left: 70%;
 }
-#section6 #section6Wrapper .scrollContainer .scrollItem p {
-  margin: 0;
-  padding: 20px;
-  font-size: 18px;
-  line-height: 1.5;
-  color: #333;
-  white-space: nowrap;
+#section6 #section6Wrapper .csrollContainer .scrollItem {
+  width: 700px;
+  height: 100%;
+  background-color: #424242;
 }
 
 #section7 {
