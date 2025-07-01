@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(TextPlugin);
+  gsap.registerPlugin(ScrollToPlugin);
 
   const tracker = document.getElementById("mouse-tracker");
 
@@ -384,72 +385,65 @@ document.addEventListener("DOMContentLoaded", () => {
 //   });
 // }
 // })
+  const section5 = document.getElementById("sectionsection5");
+    const closebtn = document.querySelector(".closebtn");
+    const wrapper = document.getElementById("section5Wrapoper");
 
-const section5 = document.getElementById("sectionsection5");
-const closebtn = document.querySelector(".closebtn");
-const wrapper = document.getElementById("section5Wrapoper");
+    function activateSection5() {
+      section5.style.position = "fixed";
+      section5.style.top = "0";
+      section5.style.left = "0";
+      section5.style.zIndex = "9999";
+      section5.style.width = "100vw";
+      section5.style.height = "100vh";
+      section5.style.display = "block";
+      document.body.style.overflow = "hidden";
+      localStorage.setItem("fixedMode", "true");
 
-function activateSection5() {
-  section5.style.position = "fixed";
-  section5.style.top = "0";
-  section5.style.left = "0";
-  section5.style.zIndex = "9999";
-  section5.style.width = "100vw";
-  section5.style.height = "100vh";
-  section5.style.display = "block";
-  document.body.style.overflow = "hidden";
-  localStorage.setItem("fixedMode", "true");
+      // Optional: animate entry of items
+      gsap.from(".horizontalScrollItem", {
+        opacity: 0,
+        y: 100,
+        stagger: 0.2,
+        duration: 0.6,
+        ease: "power2.out"
+      });
+    }
 
-  // Optional: animate entry of items
-  gsap.from(".horizontalScrollItem", {
-    opacity: 0,
-    y: 100,
-    stagger: 0.2,
-    duration: 0.6,
-    ease: "power2.out",
-  });
-}
-
-closebtn.addEventListener("click", () => {
-  section5.style.display = "none";
-  section5.removeAttribute("style");
-  document.body.style.overflow = "auto";
-  localStorage.removeItem("fixedMode");
-});
-
-// Auto-enable on reload
-if (localStorage.getItem("fixedMode") === "true") {
-  activateSection5();
-}
-
-// Smooth horizontal scroll with GSAP on mouse wheel
-let scrollPos = 0;
-wrapper.addEventListener(
-  "wheel",
-  (e) => {
-    console.log("hello log");
-
-    e.preventDefault();
-    const scrollSpeed = 100;
-    scrollPos += e.deltaY > 0 ? scrollSpeed : -scrollSpeed;
-    const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
-
-    // Clamp between 0 and maxScroll
-    scrollPos = Math.max(0, Math.min(scrollPos, maxScroll));
-
-    gsap.to(wrapper, {
-      scrollTo: { x: scrollPos },
-      duration: 0.5,
-      ease: "power2.out",
+    closebtn.addEventListener("click", () => {
+      section5.style.display = "none";
+      section5.removeAttribute("style");
+      document.body.style.overflow = "auto";
+      localStorage.removeItem("fixedMode");
     });
-  },
-  { passive: false }
-);
+
+    // Auto-enable on reload
+    if (localStorage.getItem("fixedMode") === "true") {
+      activateSection5();
+    }
+
+    // Smooth horizontal scroll with GSAP on mouse wheel
+    let scrollPos = 0;
+    wrapper.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      const scrollSpeed = 100;
+      scrollPos += e.deltaY > 0 ? scrollSpeed : -scrollSpeed;
+      const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+      scrollPos = Math.max(0, Math.min(scrollPos, maxScroll));
+
+      gsap.to(wrapper, {
+        scrollTo: { x: scrollPos },
+        duration: 0.5,
+        ease: "power2.out"
+      });
+    }, { passive: false });
+
+
 
 let section6 = document.getElementById("section6");
+let scrollContainerWrapper = document.querySelector(".scrollContainerWrapper");
 let csrollContainer = document.querySelector(".csrollContainer");
 let closeButton6 = document.querySelector(".closeButton6");
-console.log(closeButton6);
 
 if (section6) {
   let tracker = document.getElementById("mouse-tracker");
@@ -471,12 +465,46 @@ if (section6) {
       ease: "power2.out",
     });
   });
-  section6.addEventListener('click',()=>{
-    csrollContainer.style.position = "fixed";
-    csrollContainer.style.top = "0";
-    csrollContainer.style.left = "0";
-  })
+
+  section6.addEventListener('click', () => {
+    section6.style.position = "fixed";
+    section6.style.top = "0";
+    section6.style.left = "0";
+    scrollContainerWrapper.classList.remove('hidden');
+  });
 }
-closeButton6.addEventListener('click',()=>{
-  csrollContainer.removeAttribute("style");
-})
+
+closeButton6.addEventListener('click', (e) => {
+  e.stopPropagation();
+  section6.removeAttribute("style");
+  closeButton6.style.backgroundColor = "green";
+  scrollContainerWrapper.classList.add('hidden');
+});
+
+
+// Fix: Use a separate scroll position for section 6 and scroll the correct element
+let scrollPos6 = 0;
+if (scrollContainerWrapper && csrollContainer) {
+  scrollContainerWrapper.addEventListener(
+    "wheel",
+    (e) => {
+      console.log(e.deltaY);
+      
+      e.preventDefault();
+      
+      const scrollSpeed = 100;
+      scrollPos += e.deltaY > 0 ? scrollSpeed : -scrollSpeed;
+      const maxScroll = csrollContainer.scrollWidth - csrollContainer.clientWidth;
+      scrollPos = Math.max(0, Math.min(scrollPos, maxScroll));
+      gsap.to(csrollContainer, {
+        scrollTo: { x: scrollPos },
+        duration: 0.5,
+        ease: "power2.out",
+      });
+    },
+    { passive: false }
+  );
+}
+
+
+

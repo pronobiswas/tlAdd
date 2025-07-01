@@ -97,9 +97,6 @@
     <section id="section">
         <button style="margin: 20px; padding: 10px 20px;" onclick="activateSection5()">Enter Horizontal Scroll</button>
     </section>
-
-    
-
     <section id="sectionsection5">
         <div class="closebtn">X</div>
 
@@ -123,6 +120,7 @@
         </div>
 
     </section>
+
     <button class="reset-btn" onclick="localStorage.removeItem('fixedMode'); window.location.reload();">
         Reload & Reset
     </button>
@@ -136,12 +134,14 @@
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, officiis!</p>
                 </div>
             </div>
-            <div class="csrollContainer">
-                <div class="scrollItem"></div>
-                <div class="scrollItem"></div>
-                <div class="scrollItem"></div>
-                <div class="scrollItem"></div>
-                <div class="scrollItem"></div>
+            <div class="scrollContainerWrapper hidden">
+                <div class="csrollContainer">
+                    <div class="scrollItem"><h1>ITEM 1</h1></div>
+                    <div class="scrollItem"><h1>ITEM 2</h1></div>
+                    <div class="scrollItem"><h1>ITEM 3</h1></div>
+                    <div class="scrollItem"><h1>ITEM 4</h1></div>
+                    <div class="scrollItem"><h1>ITEM 5</h1></div>
+                </div>
             </div>
         </div>
     </section>

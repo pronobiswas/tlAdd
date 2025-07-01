@@ -4,66 +4,91 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GSAP Horizontal Scroll in Fixed Section</title>
-        <style>
+  <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    .hidden {
+      display: none !important;
+    }
 
     #section1, #section3 {
       height: 500px;
       background-color: #111;
     }
 
-    #sectionsection5 {
-      width: 100vw;
+    #section6 {
+      width: 100%;
       height: 100vh;
-      position: relative;
-      background: black;
-      display: none;
+      background-color: #d800d8;
     }
 
-    .closebtn {
-      width: 60px;
-      height: 60px;
+    #section6 #section6Wrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 99;
+    }
+
+    .closeButton6 {
       position: absolute;
       top: 20px;
       right: 20px;
+      width: 100px;
+      height: 100px;
       background-color: red;
-      color: white;
-      font-size: 20px;
-      z-index: 1000;
-      cursor: pointer;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 10000;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
     }
 
-    .closebtn:hover {
-      background-color: yellow;
-      color: black;
-    }
-
-    #section5Wrapoper {
+    .mainContent {
       width: 100%;
       height: 100%;
-      overflow-x: hidden; /* prevent native scrollbars */
-      white-space: nowrap;
-      position: relative;
+      display: flex;
+      align-items: flex-end;
     }
 
-    .horizontalScrollItem {
-      display: inline-block;
-      width: 70vw;
+    .proRow {
+      width: 100%;
+      padding: 20px;
+      color: #fff;
+    }
+
+    .scrollContainerWrapper {
+      width: 100%;
       height: 100%;
-      background-color: #333;
-      margin-right: 20px;
-      vertical-align: top;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 99;
+      background-color: #000;
+      overflow-x: scroll;
+      overflow-y: hidden;
     }
 
-    .horizontalScrollItem h2 {
-      font-size: 50px;
-      color: #fc11c1;
-      text-align: center;
-      margin-top: 40px;
-      font-family: sans-serif;
+    .csrollContainer {
+      width: max-content;
+      height: 100vh;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 10px;
+    }
+
+    .scrollItem {
+      width: 700px;
+      height: 100%;
+      background-color: #afafaf;
+      border: 3px solid red;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #000;
     }
 
     .reset-btn {
@@ -78,92 +103,95 @@
       cursor: pointer;
     }
   </style>
-
 </head>
 <body>
 
-  <section id="section">
-    <button style="margin: 20px; padding: 10px 20px;" onclick="activateSection5()">Enter Horizontal Scroll</button>
+  <section id="section1">
+    <button style="margin: 20px; padding: 10px 20px;" onclick="activateSection6()">Enter Horizontal Scroll</button>
   </section>
 
-  <section id="sectionsection5">
-    <div class="closebtn">X</div>
-    <div id="section5Wrapoper" class="horizontalScrollWrapper">
-      <div class="horizontalScrollItem"><h2>Item 1</h2></div>
-      <div class="horizontalScrollItem"><h2>Item 2</h2></div>
-      <div class="horizontalScrollItem"><h2>Item 3</h2></div>
-      <div class="horizontalScrollItem"><h2>Item 4</h2></div>
-      <div class="horizontalScrollItem"><h2>Item 5</h2></div>
+  <section id="section6">
+    <div id="section6Wrapper">
+      <div class="closeButton6">×</div>
+      <div class="mainContent">
+        <div class="proRow">
+          <h1>HELLO WORLD</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, officiis!</p>
+        </div>
+      </div>
+      <div class="scrollContainerWrapper hidden">
+        <div class="csrollContainer">
+          <div class="scrollItem">ITEM 1</div>
+          <div class="scrollItem">ITEM 2</div>
+          <div class="scrollItem">ITEM 3</div>
+          <div class="scrollItem">ITEM 4</div>
+          <div class="scrollItem">ITEM 5</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="section"></section>
+  <section id="section3"></section>
 
   <button class="reset-btn" onclick="localStorage.removeItem('fixedMode'); window.location.reload();">
     Reload & Reset
   </button>
 
-  <!-- GSAP CDN -->
+  <!-- GSAP & ScrollToPlugin -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
 
   <script>
     gsap.registerPlugin(ScrollToPlugin);
 
-    const section5 = document.getElementById("sectionsection5");
-    const closebtn = document.querySelector(".closebtn");
-    const wrapper = document.getElementById("section5Wrapoper");
+    const section6 = document.getElementById("section6");
+    const scrollContainerWrapper = document.querySelector(".scrollContainerWrapper");
+    const scrollContainer = document.querySelector(".csrollContainer");
+    const closeButton6 = document.querySelector(".closeButton6");
 
-    function activateSection5() {
-      section5.style.position = "fixed";
-      section5.style.top = "0";
-      section5.style.left = "0";
-      section5.style.zIndex = "9999";
-      section5.style.width = "100vw";
-      section5.style.height = "100vh";
-      section5.style.display = "block";
+    function activateSection6() {
+      section6.style.position = "fixed";
+      section6.style.top = "0";
+      section6.style.left = "0";
+      section6.style.width = "100vw";
+      section6.style.height = "100vh";
+      section6.style.zIndex = "9999";
+      scrollContainerWrapper.classList.remove("hidden");
       document.body.style.overflow = "hidden";
       localStorage.setItem("fixedMode", "true");
-
-      // Optional: animate entry of items
-      gsap.from(".horizontalScrollItem", {
-        opacity: 0,
-        y: 100,
-        stagger: 0.2,
-        duration: 0.6,
-        ease: "power2.out"
-      });
     }
 
-    closebtn.addEventListener("click", () => {
-      section5.style.display = "none";
-      section5.removeAttribute("style");
+    closeButton6.addEventListener("click", (e) => {
+      e.stopPropagation();
+      scrollContainerWrapper.classList.add("hidden");
+      section6.removeAttribute("style");
       document.body.style.overflow = "auto";
       localStorage.removeItem("fixedMode");
     });
 
-    // Auto-enable on reload
+    // Restore fixed mode if previously saved
     if (localStorage.getItem("fixedMode") === "true") {
-      activateSection5();
+      activateSection6();
     }
 
-    // Smooth horizontal scroll with GSAP on mouse wheel
-    let scrollPos = 0;
-    wrapper.addEventListener("wheel", (e) => {
-      e.preventDefault();
-      const scrollSpeed = 100;
-      scrollPos += e.deltaY > 0 ? scrollSpeed : -scrollSpeed;
-      const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+    // Wheel horizontal scroll
+    scrollContainerWrapper.addEventListener(
+      "wheel",
+      (e) => {
+        e.preventDefault();
+          const scrollSpeed = 100;
+          const currentScroll = scrollContainerWrapper.scrollLeft;
+          const maxScroll = scrollContainerWrapper.scrollWidth - scrollContainerWrapper.clientWidth;
+          const nextScroll = Math.max(0, Math.min(currentScroll + (e.deltaY > 0 ? scrollSpeed : -scrollSpeed), maxScroll));
 
-      // Clamp between 0 and maxScroll
-      scrollPos = Math.max(0, Math.min(scrollPos, maxScroll));
-
-      gsap.to(wrapper, {
-        scrollTo: { x: scrollPos },
-        duration: 0.5,
-        ease: "power2.out"
-      });
-    }, { passive: false });
+        gsap.to(scrollContainerWrapper, {
+          scrollTo: { x: nextScroll },
+          duration: 0.5,
+          ease: "power2.out",
+        });
+      },
+      { passive: false }
+    );
   </script>
 
 </body>
