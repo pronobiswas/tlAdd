@@ -318,7 +318,15 @@ document.addEventListener("DOMContentLoaded", () => {
     ">"
   );
 });
-
+let testBtn = document.querySelector('.testBtn')
+testBtn.addEventListener("mouseenter", (e) => {
+  const x = e.pageX - testBtn.offsetLeft;
+  const y = e.pageY - testBtn.offsetTop;
+  console.log(x,y);
+  
+  testBtn.style.setProperty("--x", x + "px");
+  testBtn.style.setProperty("--y", y + "px");
+});
 // let section5 = document.getElementById("sectionsection5");
 // let horizontalScrollWrapper = document.querySelector(".horizontalScrollWrapper");
 // console.log(section5);
@@ -385,60 +393,57 @@ document.addEventListener("DOMContentLoaded", () => {
 //   });
 // }
 // })
-  const section5 = document.getElementById("sectionsection5");
-    const closebtn = document.querySelector(".closebtn");
-    const wrapper = document.getElementById("section5Wrapoper");
+const section5 = document.getElementById("sectionsection5");
+const closebtn = document.querySelector(".closebtn");
+const wrapper = document.getElementById("section5Wrapoper");
+let isFixed = "false";
+function activateSection5() {
+  section5.style.position = "fixed";
+  section5.style.top = "0";
+  section5.style.left = "0";
+  section5.style.zIndex = "9999";
+  section5.style.width = "100vw";
+  section5.style.height = "100vh";
+  section5.style.display = "block";
+  document.body.style.overflow = "hidden";
+  isFixed = "true";
 
-    function activateSection5() {
-      section5.style.position = "fixed";
-      section5.style.top = "0";
-      section5.style.left = "0";
-      section5.style.zIndex = "9999";
-      section5.style.width = "100vw";
-      section5.style.height = "100vh";
-      section5.style.display = "block";
-      document.body.style.overflow = "hidden";
-      localStorage.setItem("fixedMode", "true");
+  gsap.from(".horizontalScrollItem", {
+    opacity: 0,
+    y: 100,
+    stagger: 0.2,
+    duration: 0.6,
+    ease: "power2.out",
+  });
+}
 
-      // Optional: animate entry of items
-      gsap.from(".horizontalScrollItem", {
-        opacity: 0,
-        y: 100,
-        stagger: 0.2,
-        duration: 0.6,
-        ease: "power2.out"
-      });
-    }
+closebtn.addEventListener("click", () => {
+  section5.style.display = "none";
+  section5.removeAttribute("style");
+  document.body.style.overflow = "auto";
+  isFixed = "false";
+});
+if (isFixed === "true") {
+  activateSection5();
+}
+let scrollPos = 0;
+wrapper.addEventListener(
+  "wheel",
+  (e) => {
+    e.preventDefault();
+    const scrollSpeed = 100;
+    scrollPos += e.deltaY > 0 ? scrollSpeed : -scrollSpeed;
+    const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+    scrollPos = Math.max(0, Math.min(scrollPos, maxScroll));
 
-    closebtn.addEventListener("click", () => {
-      section5.style.display = "none";
-      section5.removeAttribute("style");
-      document.body.style.overflow = "auto";
-      localStorage.removeItem("fixedMode");
+    gsap.to(wrapper, {
+      scrollTo: { x: scrollPos },
+      duration: 0.5,
+      ease: "power2.out",
     });
-
-    // Auto-enable on reload
-    if (localStorage.getItem("fixedMode") === "true") {
-      activateSection5();
-    }
-
-    // Smooth horizontal scroll with GSAP on mouse wheel
-    let scrollPos = 0;
-    wrapper.addEventListener("wheel", (e) => {
-      e.preventDefault();
-      const scrollSpeed = 100;
-      scrollPos += e.deltaY > 0 ? scrollSpeed : -scrollSpeed;
-      const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
-      scrollPos = Math.max(0, Math.min(scrollPos, maxScroll));
-
-      gsap.to(wrapper, {
-        scrollTo: { x: scrollPos },
-        duration: 0.5,
-        ease: "power2.out"
-      });
-    }, { passive: false });
-
-
+  },
+  { passive: false }
+);
 
 let section6 = document.getElementById("section6");
 let scrollContainerWrapper = document.querySelector(".scrollContainerWrapper");
@@ -466,21 +471,27 @@ if (section6) {
     });
   });
 
-  section6.addEventListener('click', () => {
+  section6.addEventListener("click", () => {
     section6.style.position = "fixed";
     section6.style.top = "0";
     section6.style.left = "0";
-    scrollContainerWrapper.classList.remove('hidden');
+    scrollContainerWrapper.classList.remove("hidden");
   });
 }
 
-closeButton6.addEventListener('click', (e) => {
+closeButton6.addEventListener("click", (e) => {
   e.stopPropagation();
   section6.removeAttribute("style");
   closeButton6.style.backgroundColor = "green";
-  scrollContainerWrapper.classList.add('hidden');
+  scrollContainerWrapper.classList.add("hidden");
+  gsap.from(".scrollItem", {
+    opacity: 0,
+    xPercent: 70,
+    stagger: 0.2,
+    duration: 1,
+    ease: "power2.out",
+  });
 });
-
 
 // Fix: Use a separate scroll position for section 6 and scroll the correct element
 let scrollPos6 = 0;
@@ -489,12 +500,13 @@ if (scrollContainerWrapper && csrollContainer) {
     "wheel",
     (e) => {
       console.log(e.deltaY);
-      
+
       e.preventDefault();
-      
+
       const scrollSpeed = 100;
       scrollPos += e.deltaY > 0 ? scrollSpeed : -scrollSpeed;
-      const maxScroll = csrollContainer.scrollWidth - csrollContainer.clientWidth;
+      const maxScroll =
+        csrollContainer.scrollWidth - csrollContainer.clientWidth;
       scrollPos = Math.max(0, Math.min(scrollPos, maxScroll));
       gsap.to(csrollContainer, {
         scrollTo: { x: scrollPos },
@@ -505,6 +517,3 @@ if (scrollContainerWrapper && csrollContainer) {
     { passive: false }
   );
 }
-
-
-

@@ -227,6 +227,44 @@ main {
     }
   }
 }
+#horizontalBtnSection{
+  width: 100%;
+  padding: 40px 0;
+  .testBtn{
+    width: fit-content;
+    height: fit-content;
+    background-color: #00000081;
+    padding: 10px 30px;
+    font-size: 24px;
+    border: 1px solid gray;
+    position: relative;
+    overflow: hidden;
+    
+    &:after{
+      content: '';
+      position: absolute;
+      top: var(--y);
+      left: var(--x);
+      width: 50px;
+      height: 50px;
+      background-color: rgb(255, 0, 0);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: all 0.5s ease;
+    }
+    &:hover::after {
+      width: 500px;
+      height: 500px;
+      opacity: 1;
+      color: #fff;
+    }
+    &:hover span{z-index: 999; color: white; position: relative; }
+    
+  }
+}
 
 .closebtn {
   width: 60px;
@@ -276,7 +314,7 @@ main {
 #section6 {
   width: 100%;
   height: 100vh;
-  background-color: #d800d8;
+  background-color: #300030;
   #section6Wrapper {
     width: 100%;
     height: 100%;
@@ -335,10 +373,9 @@ main {
         min-width: 100%;
         .scrollItem {
           display: inline-block;
-          width: 700px;
+          width: 60%;
           height: 100%;
-          background-color: #afafaf;
-          border: 3px solid red;
+          background-color: #000000;
           &:nth-child(1){background-color: transparent;}
         }
       }
