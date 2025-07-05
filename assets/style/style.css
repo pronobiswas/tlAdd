@@ -7,7 +7,7 @@
 
 body {
   width: 100vw;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 
 h1 {
@@ -51,11 +51,6 @@ section {
 main {
   width: 100%;
   height: 100vh;
-  background-image: url("../../img.jpeg");
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: 100% 100%;
-  background-position: center center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,6 +58,13 @@ main {
   color: white;
   font-family: "EB Garamond", serif;
   text-align: center;
+  position: relative;
+}
+main #headervideo {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 main .mainTextWarper {
   width: 100%;
@@ -70,6 +72,7 @@ main .mainTextWarper {
   height: fit-content;
   max-width: 1000px;
   text-transform: uppercase;
+  position: absolute;
 }
 
 #mouse-tracker {
@@ -334,24 +337,6 @@ main .mainTextWarper {
 #section6 #section6Wrapper {
   width: 100%;
   height: 100%;
-  position: relative;
-  background-color: rgba(0, 0, 0, 0);
-  z-index: 99;
-  overflow: hidden;
-}
-#section6 #section6Wrapper .closeButton6 {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 100px;
-  height: 100px;
-  background-color: red;
-  border: 2px solid red;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999 !important;
 }
 #section6 #section6Wrapper .mainContent {
   width: 100%;
@@ -366,42 +351,45 @@ main .mainTextWarper {
   padding: 20px;
   color: #fff;
 }
-#section6 #section6Wrapper .scrollContainerWrapper {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 99;
-  background-color: rgba(0, 0, 0, 0);
-}
-#section6 #section6Wrapper .scrollContainerWrapper .csrollContainer {
-  width: 100%;
-  height: 100vh;
-  max-height: 100vh;
-  white-space: nowrap;
-  overflow-x: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  scroll-behavior: smooth;
-  position: relative;
-  min-width: 100%;
-}
-#section6 #section6Wrapper .scrollContainerWrapper .csrollContainer::-webkit-scrollbar {
-  display: none;
-}
-#section6 #section6Wrapper .scrollContainerWrapper .csrollContainer .scrollItem {
-  display: inline-block;
-  width: 60%;
-  height: 100%;
-  background-color: #000000;
-}
-#section6 #section6Wrapper .scrollContainerWrapper .csrollContainer .scrollItem:nth-child(1) {
-  background-color: transparent;
-}
 
 #section7 {
   width: 100%;
   height: 100vh;
   background-color: #00ff4c;
+}
+#section7 #section7video {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+#section8 {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: rgb(0, 0, 0);
+  display: none;
+}
+#section8 #section8Wrapoper {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+#section8 #section8Wrapoper .horizontalScrollItem8 {
+  display: inline-block;
+  width: 70vw;
+  height: 100%;
+  background-color: #8d8d8d;
+  margin-right: 20px;
+  vertical-align: top;
+}
+#section8 #section8Wrapoper .horizontalScrollItem8 h2 {
+  font-size: 50px;
+  color: #fc11c1;
+  text-align: center;
+  margin-top: 40px;
+  font-family: sans-serif;
 }/*# sourceMappingURL=style.css.map */

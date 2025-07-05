@@ -183,6 +183,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     },
   });
+
+
+
+  
   function lineThrough(elm) {
     section2NavItem.forEach((item) => {
       item.style.textDecoration = "none";
@@ -207,16 +211,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // function changeText(text) {
-  //   const textElement = document.querySelector(".section2TextContent h1");
-  //   gsap.registerPlugin(TextPlugin);
-
-  //   gsap.to(textElement, {
-  //     duration: 0.5,
-  //     text: text,
-  //     ease: "none"
-  //   });
-  // }
   function chhangeImage(images, boxPosition, boxSize) {
     let floatingimageBox = document.querySelectorAll(".floatingimageBox");
     floatingimageBox.forEach((elm, idx) => {
@@ -445,15 +439,25 @@ wrapper.addEventListener(
   { passive: false }
 );
 
-let section6 = document.getElementById("section6");
-let scrollContainerWrapper = document.querySelector(".scrollContainerWrapper");
-let csrollContainer = document.querySelector(".csrollContainer");
-let closeButton6 = document.querySelector(".closeButton6");
 
-if (section6) {
+
+
+
+
+const section7 = document.getElementById('section7');
+const section7video = document.getElementById('section7video');
+if (section7video) {
+  section7video.addEventListener('ended', function () {
+    this.currentTime = 0;
+    this.play();
+  });
+}
+
+if (section7) {
   let tracker = document.getElementById("mouse-tracker");
-  section6.addEventListener("mouseenter", () => {
-    tracker.innerHTML = "view more";
+  section7video.addEventListener("mouseenter", () => {
+    tracker.innerHTML = "view project";
+    tracker.style.color = "red"
     gsap.to(tracker, {
       width: 100,
       height: 100,
@@ -461,8 +465,9 @@ if (section6) {
       ease: "power2.out",
     });
   });
-  section6.addEventListener("mouseleave", () => {
+  section7video.addEventListener("mouseleave", () => {
     tracker.innerHTML = "";
+    tracker.style.color = "black"
     gsap.to(tracker, {
       width: 30,
       height: 30,
@@ -471,49 +476,59 @@ if (section6) {
     });
   });
 
-  section6.addEventListener("click", () => {
-    section6.style.position = "fixed";
-    section6.style.top = "0";
-    section6.style.left = "0";
-    scrollContainerWrapper.classList.remove("hidden");
+  section7.addEventListener("click", () => {
+    activateSection8()
   });
 }
 
-closeButton6.addEventListener("click", (e) => {
-  e.stopPropagation();
-  section6.removeAttribute("style");
-  closeButton6.style.backgroundColor = "green";
-  scrollContainerWrapper.classList.add("hidden");
-  gsap.from(".scrollItem", {
+const section8 = document.getElementById("section8");
+const closebtn8 = document.querySelector("#closebtn8");
+const section8Wrapoper = document.getElementById("section8Wrapoper");
+let isFixed8 = "false";
+function activateSection8() {
+  section8.style.position = "fixed";
+  section8.style.top = "0";
+  section8.style.left = "0";
+  section8.style.zIndex = "9999";
+  section8.style.width = "100vw";
+  section8.style.height = "100vh";
+  section8.style.display = "block";
+  document.body.style.overflow = "hidden";
+  isFixed8 = "true";
+
+  gsap.from(".horizontalScrollItem8", {
     opacity: 0,
-    xPercent: 70,
+    y: 100,
     stagger: 0.2,
-    duration: 1,
+    duration: 0.6,
     ease: "power2.out",
   });
-});
-
-// Fix: Use a separate scroll position for section 6 and scroll the correct element
-let scrollPos6 = 0;
-if (scrollContainerWrapper && csrollContainer) {
-  scrollContainerWrapper.addEventListener(
-    "wheel",
-    (e) => {
-      console.log(e.deltaY);
-
-      e.preventDefault();
-
-      const scrollSpeed = 100;
-      scrollPos += e.deltaY > 0 ? scrollSpeed : -scrollSpeed;
-      const maxScroll =
-        csrollContainer.scrollWidth - csrollContainer.clientWidth;
-      scrollPos = Math.max(0, Math.min(scrollPos, maxScroll));
-      gsap.to(csrollContainer, {
-        scrollTo: { x: scrollPos },
-        duration: 0.5,
-        ease: "power2.out",
-      });
-    },
-    { passive: false }
-  );
 }
+
+closebtn8.addEventListener("click", () => {
+  section8.style.display = "none";
+  section8.removeAttribute("style");
+  document.body.style.overflow = "auto";
+  isFixed8 = "false";
+});
+if (isFixed8 === "true") {
+  activateSection8();
+}
+let scrollPos8 = 0;
+section8Wrapoper.addEventListener(
+  "wheel",
+  (e) => {
+    e.preventDefault();
+    const scrollSpeed = 100;
+    scrollPos += e.deltaY > 0 ? scrollSpeed : -scrollSpeed;
+    const maxScroll = section8Wrapoper.scrollWidth - section8Wrapoper.clientWidth;
+    scrollPos = Math.max(0, Math.min(scrollPos, maxScroll));
+
+    gsap.to(section8Wrapoper, {
+      scrollTo: { x: scrollPos },
+      duration: 0.5,
+      ease: "power2.out",
+    });
+  },
+  { passive: false }
+);
