@@ -72,6 +72,14 @@ main {
     text-transform: uppercase;
     position: absolute;
   }
+  .globe{
+    position: absolute;
+    z-index: 9;
+  }
+  .globeTxt{
+    position: absolute;
+    z-index: 9;
+  }
 }
 
 #mouse-tracker {

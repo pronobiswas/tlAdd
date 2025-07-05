@@ -74,6 +74,14 @@ main .mainTextWarper {
   text-transform: uppercase;
   position: absolute;
 }
+main .globe {
+  position: absolute;
+  z-index: 9;
+}
+main .globeTxt {
+  position: absolute;
+  z-index: 9;
+}
 
 #mouse-tracker {
   width: 30px;
