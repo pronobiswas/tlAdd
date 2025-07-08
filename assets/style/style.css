@@ -48,6 +48,35 @@ section {
   justify-content: center;
 }
 
+#bannerOverlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+}
+#bannerOverlay .textCon {
+  width: 100%;
+  max-width: 650px;
+  text-align: center;
+  color: yellow;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+}
+#bannerOverlay .icon {
+  width: 20%;
+}
+
 main {
   width: 100%;
   height: 100vh;
@@ -76,11 +105,15 @@ main .mainTextWarper {
 }
 main .globe {
   position: absolute;
-  z-index: 9;
+  top: 5%;
+  right: 5%;
+  z-index: 8;
 }
 main .globeTxt {
   position: absolute;
-  z-index: 9;
+  top: 5%;
+  right: 5%;
+  z-index: 8;
 }
 
 #mouse-tracker {

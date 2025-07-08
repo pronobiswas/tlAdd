@@ -43,6 +43,39 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: "power2.out",
     });
   });
+
+  let bannerOverlay = document.getElementById('bannerOverlay');
+  let icons = bannerOverlay.querySelectorAll('.icon');
+  gsap.to(bannerOverlay, {
+    xPercent: -100,
+    duration: 1.5,
+    delay: 1,
+    ease: "power4.out",
+  });
+
+  gsap.fromTo(icons,
+    {
+      scale: 0.2
+    },
+    {
+      scale: 1,
+      duration: 0.2,
+      stagger: {
+        each: 0.1, 
+        from: "random"
+      }
+    }
+  );
+  let globeTxt = document.querySelector('.globeTxt');
+      gsap.to(globeTxt, {
+      rotate: 360,
+      duration: 5,
+      repeat: -1,
+      ease: "none"
+    });
+
+
+
   // work with section2
   let section2NavItem = document.querySelectorAll(".section2NavItem h3");
   // ===text content===
@@ -186,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  
+
   function lineThrough(elm) {
     section2NavItem.forEach((item) => {
       item.style.textDecoration = "none";
@@ -316,8 +349,8 @@ let testBtn = document.querySelector('.testBtn')
 testBtn.addEventListener("mouseenter", (e) => {
   const x = e.pageX - testBtn.offsetLeft;
   const y = e.pageY - testBtn.offsetTop;
-  console.log(x,y);
-  
+  console.log(x, y);
+
   testBtn.style.setProperty("--x", x + "px");
   testBtn.style.setProperty("--y", y + "px");
 });
