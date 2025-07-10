@@ -157,7 +157,8 @@ main .globeTxt {
 #sectionsection2 {
   width: 100%;
   height: 100vh;
-  background-color: #000000;
+  background: url("../media/image/distress.webp");
+  background-size: cover;
   color: #fff;
 }
 #sectionsection2 .section2Wrapper {
@@ -217,7 +218,8 @@ main .globeTxt {
   width: 100%;
   min-height: 100vh;
   padding: 70px 0;
-  background-color: #000000;
+  background: url("../media/image/distress.webp");
+  background-size: cover;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -266,7 +268,8 @@ main .globeTxt {
 #sectionsection4 {
   width: 100%;
   height: 100vh;
-  background-color: #000000;
+  background: url("../media/image/distress.webp");
+  background-size: cover;
 }
 #sectionsection4 .bigTexContainer {
   padding: 50px 0;
@@ -373,7 +376,10 @@ main .globeTxt {
 #section6 {
   width: 100%;
   height: 100vh;
-  background-color: #300030;
+  background: #000000 url("../media/image/download.png");
+  background-size: 100% 100%;
+  background-position: center center;
+  animation: bgAnim 5s linear infinite alternate;
 }
 #section6 #section6Wrapper {
   width: 100%;
@@ -390,9 +396,17 @@ main .globeTxt {
   height: -moz-fit-content;
   height: fit-content;
   padding: 20px;
-  color: #fff;
+  color: #ffffff;
 }
 
+@keyframes bgAnim {
+  from {
+    background-size: 100% 100%;
+  }
+  to {
+    background-size: 150% 250%;
+  }
+}
 #section7 {
   width: 100%;
   height: 100vh;
@@ -433,4 +447,67 @@ main .globeTxt {
   text-align: center;
   margin-top: 40px;
   font-family: sans-serif;
+}
+
+footer {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+footer video {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+footer .abTxt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 400px;
+  font-size: 56px;
+  color: white;
+  background-color: transparent;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+footer .glitch {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%) scale(1);
+  background-color: transparent;
+  mix-blend-mode: difference;
+}
+footer .glitch:nth-child(3) {
+  background-color: rgba(255, 0, 0, 0.137254902);
+  transform: translate(-50%, -50%) scale(1);
+  mix-blend-mode: exclusion;
+}
+footer .glitch:nth-child(4) {
+  background-color: rgba(255, 230, 0, 0.0470588235);
+  transform: translate(-50%, -50%) scale(1.01);
+  mix-blend-mode: screen;
+}
+footer .glitch:nth-child(5) {
+  background-color: rgba(12, 58, 0, 0.2);
+  transform: translate(-50%, -50%) scale(1.015);
+  mix-blend-mode: lighten;
+}
+footer .glitch:nth-child(6) {
+  background-color: rgba(0, 195, 255, 0.1176470588);
+  transform: translate(-50%, -50%) scale(1.02);
+  mix-blend-mode: difference;
+}
+footer .glitch:nth-child(7) {
+  background-color: rgba(75, 1, 59, 0.1215686275);
+  transform: translate(-50%, -50%) scale(1.02);
+  mix-blend-mode: difference;
+}
+footer .glitch:nth-child(8) {
+  background-color: rgba(0, 46, 2, 0);
+  transform: translate(-50%, -50%) scale(1.02);
 }/*# sourceMappingURL=style.css.map */

@@ -214,7 +214,8 @@ main {
 #sectionsection2 {
   width: 100%;
   height: 100vh;
-  background-color: #000000;
+  background: url('../media/image/distress.webp');
+  background-size: cover;
   color: #fff;
 
   .section2Wrapper {
@@ -287,7 +288,8 @@ main {
   width: 100%;
   min-height: 100vh;
   padding: 70px 0;
-  background-color: #000000;
+  background: url('../media/image/distress.webp');
+  background-size: cover;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -345,7 +347,8 @@ main {
 #sectionsection4 {
   width: 100%;
   height: 100vh;
-  background-color: #000000;
+  background: url('../media/image/distress.webp');
+  background-size: cover;
 
   .bigTexContainer {
     padding: 50px 0;
@@ -460,7 +463,10 @@ main {
 #section6 {
   width: 100%;
   height: 100vh;
-  background-color: #300030;
+  background: #000000 url('../media/image/download.png');
+  background-size: 100% 100%;
+  background-position: center center;
+  animation: bgAnim 5s linear infinite alternate;
 
   #section6Wrapper {
     width: 100%;
@@ -474,10 +480,14 @@ main {
         width: 100%;
         height: fit-content;
         padding: 20px;
-        color: #fff;
+        color: #ffffff;
       }
     }
   }
+}
+@keyframes bgAnim {
+  from{background-size: 100% 100%;}
+  to{background-size: 150% 250%;}
 }
 
 #section7 {
@@ -522,5 +532,47 @@ main {
         font-family: sans-serif;
       }
     }
+  }
+}
+footer{
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .abTxt{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: 400px;
+    font-size: 56px;
+    color: white;
+    background-color: transparent;
+    text-align: center;
+    transform: translate(-50% , -50%);
+  }
+  .glitch{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%) scale(1);
+    background-color: transparent;
+    mix-blend-mode: difference;
+    &:nth-child(3){background-color: #ff000023; transform: translate(-50%, -50%) scale(1);mix-blend-mode: exclusion;}
+    &:nth-child(4){background-color:  #ffe6000c;transform: translate(-50%, -50%) scale(1.01);
+    mix-blend-mode: screen;}
+    &:nth-child(5){background-color: #0c3a0033;transform: translate(-50%, -50%) scale(1.015);
+    mix-blend-mode: lighten;}
+    &:nth-child(6){background-color: #00c3ff1e;transform: translate(-50%, -50%) scale(1.02);
+    mix-blend-mode: difference;}
+    &:nth-child(7){background-color: #4b013b1f;transform: translate(-50%, -50%) scale(1.02);
+    mix-blend-mode: difference;}
+    &:nth-child(8){background-color: #002e0200;transform: translate(-50%, -50%) scale(1.02);}
   }
 }

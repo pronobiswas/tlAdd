@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let icons = bannerOverlay.querySelectorAll('.icon');
   gsap.to(bannerOverlay, {
     xPercent: -100,
-    duration: 1.5,
+    duration: 2.5,
     delay: 1,
     ease: "power4.out",
   });
@@ -61,18 +61,18 @@ document.addEventListener("DOMContentLoaded", () => {
       scale: 1,
       duration: 0.2,
       stagger: {
-        each: 0.1, 
+        each: 0.1,
         from: "random"
       }
     }
   );
   let globeTxt = document.querySelector('.globeTxt');
-      gsap.to(globeTxt, {
-      rotate: 360,
-      duration: 5,
-      repeat: -1,
-      ease: "none"
-    });
+  gsap.to(globeTxt, {
+    rotate: 360,
+    duration: 5,
+    repeat: -1,
+    ease: "none"
+  });
 
 
 
@@ -473,19 +473,6 @@ wrapper.addEventListener(
 );
 
 
-
-
-
-
-const section7 = document.getElementById('section7');
-const section7video = document.getElementById('section7video');
-if (section7video) {
-  section7video.addEventListener('ended', function () {
-    this.currentTime = 0;
-    this.play();
-  });
-}
-
 if (section7) {
   let tracker = document.getElementById("mouse-tracker");
   section7video.addEventListener("mouseenter", () => {
@@ -565,3 +552,38 @@ section8Wrapoper.addEventListener(
   },
   { passive: false }
 );
+
+// ===footer===
+let footer = document.querySelector('footer');
+for (i = 0; i < 5; i++) {
+  let glitch = document.createElement('div');
+  glitch.classList.add('glitch');
+  footer.appendChild(glitch);
+}
+footer.addEventListener('mousemove', (e) => {
+  let fx= document.querySelectorAll('.glitch');
+  fx.forEach((elm)=>{
+    if (!elm.classList.contains("fx")) {
+      elm.classList.add("fx");
+    }
+  });
+
+  gsap.to('.glitch', {
+    x: e.clientX,
+    y: e.clientY, 
+    duration: 0.2,
+    ease: "none",
+    stagger:0.001,
+  });
+});
+
+
+// ==paly all the video infinity===
+let video = document.querySelectorAll('video');
+video.forEach((video) => {
+  video.addEventListener('ended', function () {
+    this.currentTime = 0;
+    this.play();
+  });
+});
+
