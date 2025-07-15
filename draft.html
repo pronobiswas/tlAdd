@@ -70,11 +70,51 @@
         <circle cx="100" cy="100" r="80" fill="tomato"/>
       </svg>
     `;
+    let svg1 = `<svg width="475" height="655" viewBox="0 0 475 655" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M474 1H0.5V96.5H252.879L474 1Z" fill="#F90000"/>
+                    <path d="M0.5 205.5V317L453.408 404L474 317L162 243.53L0.5 205.5Z" fill="#F90000"/>
+                    <path d="M341 654.5V573.5L240 548V654.5H341Z" fill="#F90000"/>
+                    <path d="M474 96.5V1L252.879 96.5L0.5 205.5L162 243.53L474 96.5Z" fill="#E50000"/>
+                    <path d="M240 548L147 486V585.5L240 654.5V548Z" fill="#E50000"/>
+                    <path d="M474 408V317L453.408 404L434 486V561.5L474 408Z" fill="#E50000"/>
+                    <path d="M434 561.5V486L341 573.5V654.5L434 561.5Z" fill="#E50000"/>
+                    <path d="M474 1H0.5V96.5H252.879M474 1V96.5L162 243.53M474 1L0.5 205.5M474 1L252.879 96.5M0.5 205.5V317L453.408 404M0.5 205.5L474 317M0.5 205.5L252.879 96.5M0.5 205.5L162 243.53M474 317V408L434 561.5M474 317L434 486M474 317L453.408 404M474 317L162 243.53M434 486V561.5M434 486L341 573.5M434 486L453.408 404M434 561.5L341 654.5M341 573.5V654.5M341 573.5L240 548M341 654.5H240M240 548L147 486V585.5L240 654.5M240 548V654.5" stroke="#F60000"/>
+                  </svg>`
+
+    let svg2 = `<svg width="181" height="1215" viewBox="0 0 181 1215" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1H180V1214H1V1Z" fill="#F21D1D" stroke="black"/>
+</svg>
+`
+
     const img1 = new Image();
     img1.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
-    img1.onload=()=>{
-      ctx.drawImage(img1,50,500);
+    img1.onload = () => {
+      ctx.drawImage(img1, 50, 500);
     }
+    // canvas1.addEventListener('click', (event) => {
+    //   gsap.to(svg1, {
+    //     duration: 1,
+    //     morphSVG: svg2,
+    //     scrollTrigger: {
+    //       trigger: "#morphSVG",
+    //       start: "top center",
+    //       end: "bottom center",
+    //       scrub: true,
+    //     }
+    //   });
+    // });
+    canvas1.addEventListener('click', (event) => {
+      // Add both SVGs to the DOM for GSAP to work with
+      document.body.insertAdjacentHTML('beforeend', svg1); // Add svg1 to DOM
+      document.body.insertAdjacentHTML('beforeend', svg2); // Add svg2 to DOM (hidden)
+
+      // Animate SVG morphing on click
+      gsap.to("#yourPathIdInSvg1", {
+        duration: 1,
+        morphSVG: "#yourPathIdInSvg2"
+      });
+    });
+
 
 
   </script>
